@@ -10,13 +10,12 @@
       rel="stylesheet"
     />
     <script type="module">
-      // Import Firebase SDK
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
       import {
         getFirestore,
         collection,
         getDocs,
-      } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
       // Firebase config
       const firebaseConfig = {
@@ -43,7 +42,15 @@
           const listItem = document.createElement("li");
           listItem.className =
             "list-group-item d-flex justify-content-between align-items-center shadow-sm";
-          listItem.innerHTML = `<strong>${data.name}</strong> <span class='badge bg-primary rounded-pill'>${data.quantity}</span>`;
+
+          // Zaktualizowane HTML
+          listItem.innerHTML = `
+            <div class="d-flex justify-content-between w-100">
+              <strong>${data.name}</strong>
+              <span class="text-muted mx-2">${data.type}</span>
+              <span class="badge bg-primary rounded-pill ms-auto">${data.quantity}</span>
+            </div>
+          `;
           productList.appendChild(listItem);
         });
       }
@@ -68,7 +75,23 @@
         transform: scale(1.02);
       }
       .container {
-        max-width: 500px;
+        max-width: 600px;
+      }
+      .list-group-item .badge {
+        font-size: 1.2em;
+      }
+      .list-group-item .text-muted {
+        font-style: italic;
+      }
+      .d-flex {
+        display: flex;
+        width: 100%;
+      }
+      .justify-content-between {
+        justify-content: space-between;
+      }
+      .ms-auto {
+        margin-left: auto;
       }
     </style>
   </head>
@@ -77,5 +100,7 @@
     <ul id="product-list" class="list-group"></ul>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <script type="module" src="add-products.js"></script> -->
   </body>
 </html>
